@@ -1,0 +1,12 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="languageSwitcherNavItemFlagDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="flag-icon flag-icon-{$locale|locale2Country}"></span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="languageSwitcherNavItemFlagDropdown">
+        {foreach $locales as $key => $value}
+            <a n:href="change!, $key" n:class="'dropdown-item', $locale === $key ? 'active', $useAjax ? 'ajax'">
+                <span class="flag-icon flag-icon-{$key|locale2Country}"></span> {$value}
+            </a>
+        {/foreach}
+    </div>
+</li>
