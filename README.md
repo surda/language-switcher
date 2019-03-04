@@ -1,4 +1,10 @@
 # Language switcher
+-----
+
+[![Build Status](https://travis-ci.org/surda/language-switcher.svg?branch=master)](https://travis-ci.org/surda/language-switcher)
+[![Licence](https://img.shields.io/packagist/l/surda/language-switcher.svg?style=flat-square)](https://packagist.org/packages/surda/language-switcher)
+[![Latest stable](https://img.shields.io/packagist/v/surda/language-switcher.svg?style=flat-square)](https://packagist.org/packages/surda/language-switcher)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
 
 ## Installation
 
