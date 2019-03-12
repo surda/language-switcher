@@ -13,7 +13,7 @@ trait TLanguageSwitcher
     /**
      * @param LanguageSwitcherFactory $LanguageSwitcherFactory
      */
-    public function injectLanguageSwitcher(LanguageSwitcherFactory $LanguageSwitcherFactory)
+    public function injectLanguageSwitcherFactory(LanguageSwitcherFactory $LanguageSwitcherFactory)
     {
         $this->languageSwitcherFactory = $LanguageSwitcherFactory;
 

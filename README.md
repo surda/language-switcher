@@ -95,7 +95,7 @@ class BasePresenter extends Presenter
     /** @persistent */
     public $locale = 'cs';
 
-    public function injectLanguageSwitcher(LanguageSwitcherFactory $LanguageSwitcherFactory)
+    public function injectLanguageSwitcherFactory(LanguageSwitcherFactory $LanguageSwitcherFactory)
     {
         $this->languageSwitcherFactory = $LanguageSwitcherFactory;
     }
