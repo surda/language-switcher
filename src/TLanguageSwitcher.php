@@ -4,7 +4,7 @@ namespace Surda\LanguageSwitcher;
 
 trait TLanguageSwitcher
 {
-    /** @persistent */
+    /** @var string @persistent */
     public $locale = 'cs';
 
     /** @var LanguageSwitcherFactory */
