@@ -2,7 +2,7 @@
 
 namespace Surda\LanguageSwitcher;
 
-trait LanguageSwitcher
+trait TLanguageSwitcher
 {
     /** @persistent */
     public $locale = 'cs';

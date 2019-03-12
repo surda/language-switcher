@@ -57,11 +57,11 @@ Inject language switcher + <code>$locale</code> persistent property
 
 ```php
 use Nette\Application\UI\Presenter;
-use Surda\LanguageSwitcher\LanguageSwitcher;
+use Surda\LanguageSwitcher\TLanguageSwitcher;
 
 class BasePresenter extends Presenter
 {
-    use LanguageSwitcher;
+    use TLanguageSwitcher;
 }
 ```
 
@@ -69,11 +69,11 @@ Inject language switcher without <code>$locale</code> persistent property
 
 ```php
 use Nette\Application\UI\Presenter;
-use Surda\LanguageSwitcher\LanguageSwitcherWithoutLocaleProperty as LanguageSwitcher;
+use Surda\LanguageSwitcher\TLanguageSwitcherWithoutLocaleProperty;
 
 class BasePresenter extends Presenter
 {
-    use LanguageSwitcher;
+    use TLanguageSwitcherWithoutLocaleProperty;
     
     /** @persistent */
     public $locale = 'cs';

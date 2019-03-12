@@ -2,7 +2,7 @@
 
 namespace Surda\LanguageSwitcher;
 
-trait LanguageSwitcherWithoutLocaleProperty
+trait TLanguageSwitcherWithoutLocaleProperty
 {
     /** @var LanguageSwitcherFactory */
     protected $languageSwitcherFactory;
