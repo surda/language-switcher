@@ -28,6 +28,7 @@ class LanguageSwitcherExtension extends CompilerExtension
     /** @var array */
     private $templates = [
         'default' => __DIR__ . '/../Templates/bootstrap4.dropdown.latte',
+        'default-sm' => __DIR__ . '/../Templates/bootstrap4.dropdown.sm.latte',
         'nav-item' => __DIR__ . '/../Templates/bootstrap4.nav-item.latte',
         'nav-item-flag' => __DIR__ . '/../Templates/bootstrap4.nav-item.flag.latte',
     ];
