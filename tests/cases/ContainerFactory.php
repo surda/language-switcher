@@ -6,7 +6,6 @@ use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
 use Surda\LanguageSwitcher\DI\LanguageSwitcherExtension;
-use Surda\LanguageSwitcher\LanguageSwitcherFactory;
 
 class ContainerFactory
 {

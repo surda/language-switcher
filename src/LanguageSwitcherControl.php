@@ -3,12 +3,12 @@
 namespace Surda\LanguageSwitcher;
 
 use Nette\Application\UI;
-use Surda\ComponentHelpers\Traits\Themeable;
 use Surda\LanguageSwitcher\Exception\InvalidArgumentException;
+use Surda\UI\Control\ThemeableControls;
 
 class LanguageSwitcherControl extends UI\Control
 {
-    use Themeable;
+    use ThemeableControls;
 
     /** @var array */
     protected $locales = [];

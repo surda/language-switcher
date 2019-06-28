@@ -3,19 +3,20 @@
 namespace Surda\LanguageSwitcher\DI;
 
 use Nette\DI\CompilerExtension;
-use Nette\Utils\Validators;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use Surda\LanguageSwitcher\LanguageSwitcherFactory;
 
 class LanguageSwitcherExtension extends CompilerExtension
 {
     /** @var array */
     public $defaults = [
-        'locales' => [],
         'default' => NULL,
+        'locales' => [],
         'locale' => NULL,
+        'useAjax' => FALSE,
         'template' => NULL,
         'templates' => [],
-        'useAjax' => FALSE,
         // Mapping language ISO 639-1 code and ISO 3166-1 Alpha-2 code
         // https://en.wikipedia.org/wiki/ISO_3166-1
         // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
@@ -33,54 +34,61 @@ class LanguageSwitcherExtension extends CompilerExtension
         'nav-item-flag' => __DIR__ . '/../Templates/bootstrap4.nav-item.flag.latte',
     ];
 
+    public function getConfigSchema(): Schema
+    {
+        return Expect::structure([
+            'default' => Expect::string()->nullable()->default(NULL),
+            'locales' => Expect::array()->default([]),
+            'locale' => Expect::string()->nullable()->default(NULL),
+            'useAjax' => Expect::bool(FALSE),
+            'template' => Expect::string()->nullable()->default(NULL),
+            'templates' => Expect::array()->default([]),
+
+            // Mapping language ISO 639-1 code and ISO 3166-1 Alpha-2 code
+            // https://en.wikipedia.org/wiki/ISO_3166-1
+            // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+            'locale2Country' => Expect::array()->default([
+                'en' => 'us',
+                'cs' => 'cz',
+            ]),
+        ]);
+    }
+
     public function loadConfiguration(): void
     {
         $builder = $this->getContainerBuilder();
-        $config = $this->validateConfig($this->defaults);
+        $config = $this->config;
 
-        $this->validate($config);
+        $itemsPerPageFactory = $builder->addFactoryDefinition($this->prefix('factory'))
+            ->setImplement(LanguageSwitcherFactory::class);
 
-        $languageSwitcher = $builder->addDefinition($this->prefix('languageSwitcher'))
-            ->setImplement(LanguageSwitcherFactory::class)
-            ->addSetup($config['useAjax'] === TRUE ? 'enableAjax' : 'disableAjax');
+        $itemsPerPageDefinition = $itemsPerPageFactory->getResultDefinition();
 
-        if ($config['locales'] !== []) {
-            $languageSwitcher->addSetup('setLocales', [$config['locales']]);
+        $itemsPerPageDefinition->addSetup($config->useAjax === TRUE ? 'enableAjax' : 'disableAjax');
+
+        if ($config->locales !== []) {
+            $itemsPerPageDefinition->addSetup('setLocales', [$config->locales]);
         }
 
-        if ($config['default'] !== NULL) {
-            $languageSwitcher->addSetup('setDefaultLocale', [$config['default']]);
+        if ($config->default !== NULL) {
+            $itemsPerPageDefinition->addSetup('setDefaultLocale', [$config->default]);
         }
 
-        if ($config['locale'] !== NULL) {
-            $languageSwitcher->addSetup('setLocale', [$config['locale']]);
+        if ($config->locale !== NULL) {
+            $itemsPerPageDefinition->addSetup('setLocale', [$config->locale]);
         }
 
-        $templates = $config['templates'] === [] ? $this->templates : $config['templates'];
+        $templates = $config->templates === [] ? $this->templates : $config->templates;
         foreach ($templates as $type => $templateFile) {
-            $languageSwitcher->addSetup('setTemplateByType', [$type, $templateFile]);
+            $itemsPerPageDefinition->addSetup('setTemplateByType', [$type, $templateFile]);
         }
 
-        if ($config['template'] !== NULL) {
-            $languageSwitcher->addSetup('setTemplate', [$config['template']]);
+        if ($config->template !== NULL) {
+            $itemsPerPageDefinition->addSetup('setTemplate', [$config->template]);
         }
 
-        if ($config['locale2Country'] !== []) {
-            $languageSwitcher->addSetup('setLocale2Country', [$config['locale2Country']]);
+        if ($config->locale2Country !== []) {
+            $itemsPerPageDefinition->addSetup('setLocale2Country', [$config->locale2Country]);
         }
-    }
-
-    /**
-     * @param array $config
-     */
-    private function validate(array $config): void
-    {
-        Validators::assertField($config, 'locales', 'array');
-        Validators::assertField($config, 'default', 'string');
-        Validators::assertField($config, 'locale', 'string|null');
-        Validators::assertField($config, 'useAjax', 'bool');
-        Validators::assertField($config, 'template', 'string|null');
-        Validators::assertField($config, 'templates', 'array');
-        Validators::assertField($config, 'locale2Country', 'array');
     }
 }

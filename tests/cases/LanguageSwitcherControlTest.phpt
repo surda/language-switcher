@@ -5,20 +5,16 @@ namespace Tests\Surda\LanguageSwitcher;
 use Nette\DI\Container;
 use Surda\LanguageSwitcher\LanguageSwitcherControl;
 use Surda\LanguageSwitcher\LanguageSwitcherFactory;
-use Testbench\TComponent;
 use Tester\TestCase;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
-require __DIR__ . '/../bootstrap.testbench.php';
 
 /**
  * @testCase
  */
 class LanguageSwitcherControlTest extends TestCase
 {
-    use TComponent;
-
     /**
      * @return Container
      */
@@ -46,7 +42,7 @@ class LanguageSwitcherControlTest extends TestCase
     public function testControl()
     {
         /** @var LanguageSwitcherFactory $factory */
-        $factory = $this->createContainer()->getService('languageSwitcher.languageSwitcher');
+        $factory = $this->createContainer()->getService('languageSwitcher.factory');
 
         /** @var LanguageSwitcherControl $control */
         $control = $factory->create();

@@ -27,7 +27,7 @@ class LanguageSwitcherExtensionTest extends TestCase
             ]
         ]);
 
-        $service = $container->getService('languageSwitcher.languageSwitcher');
+        $service = $container->getService('languageSwitcher.factory');
         Assert::true($service instanceof LanguageSwitcherFactory);
 
         $service = $container->getByType(LanguageSwitcherFactory::class);
