@@ -45,6 +45,9 @@
         ],
         "phpstan": [
             "vendor/bin/phpstan analyse -l max -c phpstan.neon src"
+        ],
+        "da": [
+            "composer dump-autoload -o"
         ]
     },
     "minimum-stability": "stable"
