@@ -170,3 +170,4 @@ class ProductPresenter extends Presenter
     }
 }
 ```
+Template file <code>bootstrap4.nav-item.flag.latte</code> using flags from https://github.com/lipis/flag-icon-css
