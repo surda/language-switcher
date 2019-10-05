@@ -5,8 +5,12 @@ namespace Surda\LanguageSwitcher\DI;
 use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
+use stdClass;
 use Surda\LanguageSwitcher\LanguageSwitcherFactory;
 
+/**
+ * @property-read stdClass $config
+ */
 class LanguageSwitcherExtension extends CompilerExtension
 {
     /** @var array */
